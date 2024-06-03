@@ -17,11 +17,11 @@ export default function Index() {
               className="size-fit"
               src="Norman-Qian-220618-Raw-004.jpeg"
             ></img>
-            <h1 className="text-center text-3xl font-bold underline bg-yellow">
+            <h1 className="text-black text-center text-4xl font-bold underline bg-yellow">
               Norman Qian
             </h1>
             <a target="_blank" href="/about" rel="noreferrer">
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
                 About Page
               </button>
             </a>
@@ -30,7 +30,7 @@ export default function Index() {
               href="https://github.com/elizasviel"
               rel="noreferrer"
             >
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
                 GitHub
               </button>
             </a>
@@ -39,18 +39,29 @@ export default function Index() {
               href="https://linkedin.com/in/norman-qian"
               rel="noreferrer"
             >
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
                 LinkedIn
               </button>
             </a>
             <a target="_blank" href="" rel="noreferrer">
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
                 Projects
               </button>
             </a>
           </div>
         </nav>
-        <div className="card w-96 bg-base-100 shadow-xl">
+
+        <div className="card w-96 h-96 bg-emerald-200 shadow-xl">
+          <figure>
+            <img
+              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div className="card-body"></div>
+        </div>
+
+        <div className="card w-96 h-96 bg-emerald-200 shadow-xl p-10">
           <figure>
             <img
               src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
