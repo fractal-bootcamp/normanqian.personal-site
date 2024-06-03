@@ -4,7 +4,6 @@ export default function About() {
             <p className = "underline">placeholder text</p>
             <p>knight and bishop checkmate visualizer</p>
             <p>Placeholder Bio</p>
-            <img src='Norman-Qian-220618-Raw-004.jpeg'></img>
           <a
             target="_blank"
             href="/"
