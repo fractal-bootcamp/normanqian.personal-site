@@ -7,35 +7,56 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
+    <div>
+    <h1 className="text-3xl font-bold underline" >Norman Qian</h1>
+    <div >
+      
       <ul>
         <li>
-          <a
+        <a 
             target="_blank"
-            href="https://remix.run/tutorials/blog"
+            href="/about"
             rel="noreferrer"
           >
-            15m Quickstart Blog Tutorial
+            About Page
           </a>
         </li>
+        
         <li>
-          <a
+        <a
+        target="_blank"
+            href="https://github.com/elizasviel"
+            rel="noreferrer"             
+        >
+          GitHub
+          </a>
+        </li>
+
+        <li>
+        <a
             target="_blank"
-            href="https://remix.run/tutorials/jokes"
+            href="https://linkedin.com/in/norman-qian"
             rel="noreferrer"
           >
-            Deep Dive Jokes App Tutorial
-          </a>
+            LinkedIn
+        </a>
         </li>
+
         <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
+        <a
+          target="_blank"
+          href=""
+          rel="noreferrer"
+        >
+            Projects
+        </a>
         </li>
+
       </ul>
+    </div>
     </div>
   );
 }
