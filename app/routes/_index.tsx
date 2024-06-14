@@ -21,7 +21,7 @@ export default function Index() {
               Norman Qian
             </h1>
             <a target="_blank" href="/about" rel="noreferrer">
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full animate-spin">
                 About Page
               </button>
             </a>
@@ -30,7 +30,7 @@ export default function Index() {
               href="https://github.com/elizasviel"
               rel="noreferrer"
             >
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full animate-ping">
                 GitHub
               </button>
             </a>
@@ -39,12 +39,12 @@ export default function Index() {
               href="https://linkedin.com/in/norman-qian"
               rel="noreferrer"
             >
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full animate-pulse">
                 LinkedIn
               </button>
             </a>
             <a target="_blank" href="" rel="noreferrer">
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full">
+              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full ">
                 Projects
               </button>
             </a>
