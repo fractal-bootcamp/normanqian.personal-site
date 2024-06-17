@@ -1,96 +1,63 @@
 import type { MetaFunction } from "@remix-run/node";
 
+//
+//className="rounded-full"
+
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "Norman Qian" }, { name: "Personal Site" }];
 };
 
 export default function Index() {
   return (
-    <>
-      <div className="flex flex-row gap-10">
-        <nav>
-          <div className="h-screen relative w-64 flex space-y-16 flex-col p-3 bg-yellow-500 ">
-            <img
-              className="size-fit rounded-md"
-              src="Norman-Qian-220618-Raw-004.jpeg"
-            ></img>
-            <h1 className="text-black text-center text-4xl font-bold underline bg-yellow">
-              Norman Qian
-            </h1>
-            <a target="_blank" href="/about" rel="noreferrer">
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full animate-spin">
-                About Page
-              </button>
-            </a>
-            <a
-              target="_blank"
-              href="https://github.com/elizasviel"
-              rel="noreferrer"
-            >
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full animate-ping">
-                GitHub
-              </button>
-            </a>
-            <a
-              target="_blank"
-              href="https://linkedin.com/in/norman-qian"
-              rel="noreferrer"
-            >
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full animate-pulse">
-                LinkedIn
-              </button>
-            </a>
-            <a target="_blank" href="" rel="noreferrer">
-              <button className="size-full bg-emerald-500 hover:bg-emerald-700 text-white text-2xl font-bold rounded-full ">
-                Projects
-              </button>
-            </a>
-          </div>
-        </nav>
+    <div>
+      <div className="bg-black display: flex w-full aspect-[12/3]">
+        <img src="Norman-Qian-220618-Raw-004.jpeg" className="px-3 py-3"></img>
 
-        <div className="card w-96 h-96 bg-emerald-200 shadow-xl hover:bg-emerald-700">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body"> Placeholder</div>
-        </div>
-
-        <div className="card w-96 h-96 bg-emerald-200 shadow-xl hover:bg-emerald-700">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body"> Placeholder</div>
-        </div>
-
-        <div className="card w-96 h-96 bg-emerald-200 shadow-xl hover:bg-emerald-700">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body"> Placeholder</div>
-        </div>
-
-        <div className="card w-96 h-96 bg-emerald-200 shadow-xl hover:bg-emerald-700">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body"> Placeholder</div>
+        <div className="bg-gray-500  content-center w-full">
+          <p className="text-6xl px-10">Norman Qian</p>
+          <br />
+          <p className="px-10">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+            condimentum quam vel porta commodo. Donec lobortis purus in leo
+            posuere, vitae venenatis orci finibus. Fusce a est lorem. Ut
+            lacinia, orci eu rutrum volutpat, lectus augue euismod sem, eu
+            elementum ligula nisl in odio. Morbi eget facilisis erat.
+            Suspendisse eleifend neque sit amet felis fermentum, sed viverra
+            enim tempus. Vivamus vestibulum felis vel posuere pulvinar. Mauris
+            vestibulum ipsum sit amet sapien dapibus, id finibus arcu sagittis.
+            Nullam sagittis purus ut faucibus tristique. Curabitur velit velit,
+            imperdiet eleifend metus sit amet, hendrerit lacinia
+          </p>
         </div>
       </div>
-    </>
+      <div className="grid grid-cols-4 grid-rows-3">
+        <div className="bg-emerald-700 aspect-square hover:animate-spin">
+          Norman Qian
+        </div>
+        <div className="bg-emerald-700 aspect-square">Norman Qian</div>
+        <div className="bg-emerald-700 aspect-square">Norman Qian</div>
+        <div className="bg-emerald-700 aspect-square">Norman Qian</div>
+      </div>
+      <div className="display: flex">
+        <div className="bg-indigo-500 aspect-square">Norman Qian</div>
+        <div className="bg-indigo-500 aspect-square">Norman Qian</div>
+        <div className="bg-indigo-500 aspect-square">Norman Qian</div>
+        <div className="bg-indigo-500 aspect-square">Norman Qian</div>
+      </div>
+      <div className="display: inline-block">
+        <div className="bg-gray-500 aspect-square">Norman Qian</div>
+        <div className="bg-gray-500 aspect-square">Norman Qian</div>
+        <div className="bg-gray-500 aspect-square">Norman Qian</div>
+        <div className="bg-gray-500 aspect-square">Norman Qian</div>
+      </div>
+      <div className="display: table">
+        <div className="bg-amber-500 aspect-square">Norman Qian</div>
+        <div className="bg-amber-500 aspect-square">Norman Qian</div>
+        <div className="bg-amber-500 aspect-square">Norman Qian</div>
+        <div className="bg-amber-500 aspect-square">Norman Qian</div>
+      </div>
+
+      <div className="bg-yellow-500 aspect-auto">Norman Qian</div>
+    </div>
   );
 }
