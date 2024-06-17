@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 //
 //className="rounded-full"
@@ -8,22 +9,32 @@ export const meta: MetaFunction = () => {
   return [{ title: "Norman Qian" }, { name: "Personal Site" }];
 };
 
-const Square = () => {
+const Display = ({ displayData }) => {
+  return (
+    <div className="hidden lg:block basis-1/2">
+      <img src={displayData}></img>
+    </div>
+  );
+};
+
+const Square = ({ img, handleHover, text }) => {
   return (
     <motion.div
-      className="bg-rose-200 "
+      onMouseOver={() => handleHover()}
+      className="bg-rose-200"
       animate={{
         scale: [1, 2, 2, 1, 1],
         rotate: [0, 0, 270, 270, 0],
         borderRadius: ["20%", "20%", "50%", "50%", "20%"],
       }}
     >
-      <img src="Norman-Qian-220618-Raw-004.jpeg" className="px-5 py-5"></img>
+      {text}
     </motion.div>
   );
 };
 
 export default function Index() {
+  const [displayData, setDisplayData] = useState("");
   return (
     <div className="overscroll-none ">
       <div className="bg-black display: flex w-full aspect-[12/3] ">
@@ -38,21 +49,33 @@ export default function Index() {
             posuere, vitae venenatis orci finibus. Fusce a est lorem. Ut
             lacinia, orci eu rutrum volutpat, lectus augue euismod sem, eu
             elementum ligula nisl in odio. Morbi eget facilisis erat.
-            Suspendisse eleifend neque sit amet felis fermentum, sed viverra
-            enim tempus.
           </p>
         </div>
       </div>
 
-      <div className="display: flex">
-        <div className="basis-1/2 bg-gray-200">
-          abcajdnfsvlogaquiehgfjaenrgorjeang
-        </div>
+      <div className="display: flex bg-gray-200">
+        <Display displayData={displayData}></Display>
+
         <div className="grid gap-4 grid-cols-2 grid-rows-2 basis-1/2">
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
+          <Square
+            handleHover={() =>
+              setDisplayData("Norman-Qian-220618-Raw-004.jpeg")
+            }
+            text={"FizzBuzz"}
+          ></Square>
+
+          <Square
+            handleHover={() => setDisplayData("banana.jpeg")}
+            text={"Survey App"}
+          ></Square>
+          <Square
+            handleHover={() => setDisplayData("orange.jpeg")}
+            text={"Flappy Birds"}
+          ></Square>
+          <Square
+            handleHover={() => setDisplayData("watermelon.jpeg")}
+            text={"StarDew Valley"}
+          ></Square>
         </div>
       </div>
     </div>
