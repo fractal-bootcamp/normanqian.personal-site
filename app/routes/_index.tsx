@@ -8,40 +8,35 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
-  const [brightness, setBrightness] = useState(0);
+export default function Home() {
+  const [project, setProject] = useState("");
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
       <img
-        src="/gameGif.gif"
         style={{
+          width: "100vw",
+          height: "100vh",
+          display: "block",
           position: "absolute",
-          width: "40%",
-          height: "auto",
-          top: "45%",
-          left: "30%",
+        }}
+        src="/bright0cut.png"
+        alt="Background"
+      />
+      <img
+        style={{
+          width: "150vw",
+          height: "150vh",
+          transform: "scale(0.2)",
+          top: "-10vh",
+          left: "-25vw",
+          position: "absolute",
           zIndex: -1,
-        }}
-      />
-      <img
-        style={{
-          width: "100%",
-          height: "100%",
           objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 0,
         }}
-        src={`/bright${brightness}cut.png`}
+        src="/gameGif.gif"
+        alt="Plant"
       />
+      <BlackboardLG />
       <BlackboardSM />
     </div>
   );
@@ -62,16 +57,16 @@ const BlackboardLG = () => {
     <div
       style={{
         position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-25%, -110%)",
+        top: "10vh",
+        left: "45vw",
+        transform: "translate(-30%, -110%) scale(clamp(0.5, 1vw, 1.5))",
         zIndex: 10,
         color: "gray",
         backgroundColor: "transparent",
-        padding: "20px",
-        borderRadius: "10px",
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        fontSize: "30px",
+        padding: "clamp(1vh, 2vw, 3vh)",
+        borderRadius: "1vw",
+        boxShadow: "0 0.4vh 0.6vh rgba(0, 0, 0, 0.1)",
+        fontSize: "clamp(1.6vh, 3vw, 3vh)",
         fontFamily: "Chalkduster, fantasy",
       }}
     >
@@ -87,19 +82,31 @@ const BlackboardSM = () => {
     <div
       style={{
         position: "absolute",
-        transform: "translate(-2%, -320%) perspective(500px) rotateY(22deg)",
+        top: "15vh",
+        left: "0",
+        transform: "perspective(50vw) rotateY(22deg)",
         zIndex: 10,
         color: "gray",
         backgroundColor: "transparent",
-        padding: "20px",
-        borderRadius: "10px",
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        fontSize: "13px",
+        padding: "1vh",
+        borderRadius: "1vw",
+        boxShadow: "0 0.4vh 0.6vh rgba(0, 0, 0, 0.1)",
         fontFamily: "Chalkduster, fantasy",
+        maxWidth: "90vw",
+        fontSize: "clamp(1.6vh, 1.5vw, 2.4vh)",
       }}
     >
-      <h2>Norman Qian</h2>
-      <h3>Links</h3>
+      <h2 style={{ fontSize: "clamp(2vh, 2vw, 3vh)", marginBottom: "0.5em" }}>
+        Norman Qian
+      </h2>
+      <h3
+        style={{
+          fontSize: "clamp(1.8vh, 1.8vw, 2vh)",
+          marginBottom: "0.5em",
+        }}
+      >
+        Links
+      </h3>
       {[
         "normanqian@gmail.com",
         "github.com/elizsviel",
@@ -107,7 +114,12 @@ const BlackboardSM = () => {
       ].map((link) => (
         <p
           key={link}
-          style={{ cursor: "pointer" }}
+          style={{
+            cursor: "pointer",
+            margin: "0.3em 0",
+            transition: "color 0.2s",
+            fontSize: "clamp(1.4vh, 1.4vw, 1.8vh)",
+          }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
           onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
@@ -130,14 +142,6 @@ const Whiteboard = () => {
 
 const Computer = () => {
   return <div className="computer"></div>;
-};
-
-const Plant = () => {
-  return (
-    <div className="plant">
-      <img src="/plant.png" alt="Plant" />
-    </div>
-  );
 };
 
 const Lamp = ({
