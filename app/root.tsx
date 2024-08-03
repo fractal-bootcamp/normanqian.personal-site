@@ -6,13 +6,6 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import type { LinksFunction } from "@remix-run/node";
-import stylesheet from "~/tailwind.css?url";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
-];
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -22,7 +15,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body
+        style={{
+          width: "100%",
+          height: "100%",
+          padding: 0,
+          margin: 0,
+          overscrollBehavior: "none",
+          overflow: "hidden", // Add this line
+        }}
+      >
         {children}
         <ScrollRestoration />
         <Scripts />
