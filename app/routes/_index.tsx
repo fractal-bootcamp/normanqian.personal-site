@@ -18,26 +18,53 @@ export default function Home() {
           height: "100vh",
           display: "block",
           position: "absolute",
+          zIndex: -1,
         }}
-        src="/bright0cut.png"
+        src="/homepageRedraw1.png"
         alt="Background"
       />
       <img
         style={{
-          width: "150vw",
-          height: "150vh",
-          transform: "scale(0.2)",
-          top: "-10vh",
-          left: "-25vw",
+          width: "100vw",
+          height: "100vh",
+          display: "block",
           position: "absolute",
           zIndex: -1,
+        }}
+        src="/homepageRedraw2.png"
+        alt="Background"
+      />
+      <img
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "block",
+          position: "absolute",
+          zIndex: -1,
+          paddingLeft: "2px",
+        }}
+        src="/lightcone0.png"
+        alt="Background"
+      />
+
+      <img
+        style={{
+          width: "40vw",
+          height: "45vh",
+          right: "0.8%",
+          top: "9.2%",
+          position: "absolute",
+          zIndex: 1,
           objectFit: "cover",
+          transform:
+            "perspective(80vw) rotateY(-50deg) rotateZ(-1deg) scale(0.95)",
+          opacity: 0.5,
+          border: "1px solid black",
         }}
         src="/gameGif.gif"
         alt="Plant"
       />
       <BlackboardLG />
-      <BlackboardSM />
     </div>
   );
 }
@@ -58,21 +85,39 @@ const BlackboardLG = () => {
       style={{
         position: "absolute",
         top: "10vh",
-        left: "45vw",
-        transform: "translate(-30%, -110%) scale(clamp(0.5, 1vw, 1.5))",
+        left: "46vw",
         zIndex: 10,
-        color: "gray",
-        backgroundColor: "transparent",
-        padding: "clamp(1vh, 2vw, 3vh)",
-        borderRadius: "1vw",
-        boxShadow: "0 0.4vh 0.6vh rgba(0, 0, 0, 0.1)",
-        fontSize: "clamp(1.6vh, 3vw, 3vh)",
+        color: "lightgray",
+        width: "20%",
+        fontSize: "2vw",
         fontFamily: "Chalkduster, fantasy",
       }}
     >
       <h3>Select Project </h3>
-      <p>&nbsp; Spinner</p>
-      <p>&nbsp; Tic Tac Toe</p>
+      <p
+        onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
+        onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
+        onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+      >
+        &nbsp; Spinner
+      </p>
+      <p
+        onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
+        onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
+        onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+      >
+        &nbsp; Email Sender
+      </p>
+      <p
+        onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
+        onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
+        onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+      >
+        &nbsp; Tic Tac Toe
+      </p>
     </div>
   );
 };
@@ -82,31 +127,18 @@ const BlackboardSM = () => {
     <div
       style={{
         position: "absolute",
-        top: "15vh",
+        top: "16vh",
         left: "0",
         transform: "perspective(50vw) rotateY(22deg)",
         zIndex: 10,
-        color: "gray",
-        backgroundColor: "transparent",
-        padding: "1vh",
-        borderRadius: "1vw",
-        boxShadow: "0 0.4vh 0.6vh rgba(0, 0, 0, 0.1)",
+        color: "lightgray",
+        width: "15%",
+
         fontFamily: "Chalkduster, fantasy",
-        maxWidth: "90vw",
-        fontSize: "clamp(1.6vh, 1.5vw, 2.4vh)",
       }}
     >
-      <h2 style={{ fontSize: "clamp(2vh, 2vw, 3vh)", marginBottom: "0.5em" }}>
-        Norman Qian
-      </h2>
-      <h3
-        style={{
-          fontSize: "clamp(1.8vh, 1.8vw, 2vh)",
-          marginBottom: "0.5em",
-        }}
-      >
-        Links
-      </h3>
+      <p>Norman Qian</p>
+
       {[
         "normanqian@gmail.com",
         "github.com/elizsviel",
@@ -118,7 +150,7 @@ const BlackboardSM = () => {
             cursor: "pointer",
             margin: "0.3em 0",
             transition: "color 0.2s",
-            fontSize: "clamp(1.4vh, 1.4vw, 1.8vh)",
+            fontSize: "1.2vw",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
