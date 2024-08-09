@@ -11,6 +11,7 @@ export const meta: MetaFunction = () => {
 export default function Home() {
   const [project, setProject] = useState("");
   return (
+
     <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
       <img
         style={{
@@ -66,21 +67,11 @@ export default function Home() {
       />
       <BlackboardLG />
     </div>
-  );
-}
 
-/*
-      <button
-        onClick={() =>
-          brightness < 3 ? setBrightness(brightness + 1) : setBrightness(0)
-        }
-      >
-        Increase brightness
-      </button>
-*/
 
 const BlackboardLG = () => {
   return (
+
     <div
       style={{
         position: "absolute",
