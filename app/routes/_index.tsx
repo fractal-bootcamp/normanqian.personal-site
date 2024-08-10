@@ -10,8 +10,26 @@ export const meta: MetaFunction = () => {
 
 export default function Home() {
   const [project, setProject] = useState("");
-  return (
+  const [currentGifIndex, setCurrentGifIndex] = useState(0);
 
+  const gifs = [
+    {
+      src: "assets/mailGif.gif",
+      link: "https://norman-mailing-list.vercel.app/",
+    },
+    { src: "assets/gameGif.gif", link: "https://norman-art.vercel.app" },
+    // Add more gifs and links as needed
+  ];
+
+  const showNextGif = () => {
+    setCurrentGifIndex((prevIndex) => (prevIndex + 1) % gifs.length);
+  };
+
+  const enterApp = () => {
+    window.open(gifs[currentGifIndex].link, "_blank");
+  };
+
+  return (
     <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
       <img
         style={{
@@ -21,30 +39,20 @@ export default function Home() {
           position: "absolute",
           zIndex: -1,
         }}
-        src="/homepageRedraw1.png"
+        src="assets/homepageRedrawCut0.png"
         alt="Background"
       />
+
       <img
         style={{
           width: "100vw",
           height: "100vh",
           display: "block",
           position: "absolute",
-          zIndex: -1,
-        }}
-        src="/homepageRedraw2.png"
-        alt="Background"
-      />
-      <img
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "block",
-          position: "absolute",
-          zIndex: -1,
+          zIndex: 1,
           paddingLeft: "2px",
         }}
-        src="/lightcone0.png"
+        src="assets/lightcone0.png"
         alt="Background"
       />
 
@@ -62,16 +70,53 @@ export default function Home() {
           opacity: 0.5,
           border: "1px solid black",
         }}
-        src="/gameGif.gif"
-        alt="Plant"
+        src={gifs[currentGifIndex].src}
+        alt="Project Preview"
       />
+      <div
+        style={{
+          position: "absolute",
+          width: "100vw",
+          height: "100vh",
+          zIndex: -10,
+          background: "blue",
+        }}
+      ></div>
+
+      <button
+        onClick={showNextGif}
+        style={{
+          top: "63%",
+          left: "47%",
+          zIndex: 10,
+          position: "absolute",
+          background: "gray",
+          rotate: "-9deg",
+        }}
+      >
+        Show Next ❯
+      </button>
+      <button
+        onClick={enterApp}
+        style={{
+          top: "66.5%",
+          left: "47.7%",
+          zIndex: 10,
+          position: "absolute",
+          background: "green",
+          rotate: "-9deg",
+          fontWeight: "bold",
+        }}
+      >
+        Enter App
+      </button>
       <BlackboardLG />
     </div>
-
+  );
+}
 
 const BlackboardLG = () => {
   return (
-
     <div
       style={{
         position: "absolute",
@@ -84,129 +129,44 @@ const BlackboardLG = () => {
         fontFamily: "Chalkduster, fantasy",
       }}
     >
-      <h3>Select Project </h3>
-      <p
-        onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
-        onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
-        onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-      >
-        &nbsp; Spinner
-      </p>
-      <p
-        onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
-        onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
-        onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-      >
-        &nbsp; Email Sender
-      </p>
-      <p
-        onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
-        onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
-        onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-      >
-        &nbsp; Tic Tac Toe
-      </p>
+      <h3>Norman Qian </h3>
+      <h5> &nbsp; Building Software </h5>
+      <div style={{ paddingLeft: "0.5em" }}>
+        {[
+          {
+            text: "github.com/elizasviel",
+            href: "https://github.com/elizasviel",
+          },
+          {
+            text: "linkedin.com/in/norman-qian",
+            href: "https://linkedin.com/in/norman-qian",
+          },
+          { text: "normanqian@gmail.com", href: "mailto:normanqian@gmail.com" },
+        ].map(({ text, href }) => (
+          <a
+            key={text}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              cursor: "pointer",
+              margin: "0.4em 0",
+              transition: "color 0.2s",
+              fontSize: "1.2vw",
+              paddingLeft: "1em",
+              display: "block",
+              textDecoration: "none",
+              color: "lightgray",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "lightgray")}
+            onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
+            onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
+          >
+            {text}
+          </a>
+        ))}
+      </div>
     </div>
-  );
-};
-
-const BlackboardSM = () => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: "16vh",
-        left: "0",
-        transform: "perspective(50vw) rotateY(22deg)",
-        zIndex: 10,
-        color: "lightgray",
-        width: "15%",
-
-        fontFamily: "Chalkduster, fantasy",
-      }}
-    >
-      <p>Norman Qian</p>
-
-      {[
-        "normanqian@gmail.com",
-        "github.com/elizsviel",
-        "linkedin.com/in/norman-qian",
-      ].map((link) => (
-        <p
-          key={link}
-          style={{
-            cursor: "pointer",
-            margin: "0.3em 0",
-            transition: "color 0.2s",
-            fontSize: "1.2vw",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "gray")}
-          onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
-          onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-        >
-          {link}
-        </p>
-      ))}
-    </div>
-  );
-};
-
-const Whiteboard = () => {
-  return (
-    <div className="whiteboard">
-      <img src="/whiteboard.png" alt="Whiteboard" />
-    </div>
-  );
-};
-
-const Computer = () => {
-  return <div className="computer"></div>;
-};
-
-const Lamp = ({
-  brightness,
-  setBrightness,
-}: {
-  brightness: number;
-  setBrightness: (brightness: number) => void;
-}) => {
-  return (
-    <img
-      style={{
-        position: "absolute",
-        top: "50%",
-        left: "17%",
-        zIndex: 10,
-        transform: "scale(0.8)",
-        opacity: 0,
-        transition: "transform 0.1s, opacity 0.1s",
-      }}
-      alt="Lamp"
-      src="/lampOn.png"
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "scale(0.85)";
-        e.currentTarget.style.opacity = "1";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "scale(0.8)";
-        e.currentTarget.style.opacity = "0";
-      }}
-      onMouseDown={(e) => {
-        e.currentTarget.style.transform = "scale(0.75)";
-        e.currentTarget.style.opacity = "0.5";
-      }}
-      onMouseUp={(e) => {
-        e.currentTarget.style.transform = "scale(0.8)";
-        e.currentTarget.style.opacity = "1";
-      }}
-      onClick={() => {
-        if (brightness < 3) setBrightness(brightness + 1);
-        else setBrightness(0);
-      }}
-    />
   );
 };
