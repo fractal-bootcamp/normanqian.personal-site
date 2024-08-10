@@ -14,10 +14,10 @@ export default function Home() {
 
   const gifs = [
     {
-      src: "assets/mailGif.gif",
+      src: "/mailGif.gif",
       link: "https://norman-mailing-list.vercel.app/",
     },
-    { src: "assets/gameGif.gif", link: "https://norman-art.vercel.app" },
+    { src: "/gameGif.gif", link: "https://norman-art.vercel.app" },
     // Add more gifs and links as needed
   ];
 
@@ -39,7 +39,7 @@ export default function Home() {
           position: "absolute",
           zIndex: -1,
         }}
-        src="assets/homepageRedrawCut0.png"
+        src="/homepageRedrawCut0.png"
         alt="Background"
       />
 
@@ -52,7 +52,7 @@ export default function Home() {
           zIndex: 1,
           paddingLeft: "2px",
         }}
-        src="assets/lightcone0.png"
+        src="/lightcone0.png"
         alt="Background"
       />
 
