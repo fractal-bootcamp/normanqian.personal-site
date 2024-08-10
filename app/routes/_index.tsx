@@ -63,7 +63,7 @@ export default function Home() {
           zIndex: 1,
           paddingLeft: "2px",
         }}
-        src={isAlternateImage ? lightcone0 : lightcone1}
+        src={isAlternateImage ? lightcone1 : lightcone0}
         alt="Background"
       />
 
