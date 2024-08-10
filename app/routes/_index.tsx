@@ -1,5 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
+import gameGif from "../images/gameGif.gif";
+import mailGif from "../images/mailGif.gif";
+import homepageRedrawCut0 from "../images/homepageRedrawCut0.png";
+import homepageRedrawCut1 from "../images/homepageRedrawCut1.png";
+import lightcone0 from "../images/lightcone0.png";
+import lightcone1 from "../images/lightcone1.png";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,10 +21,10 @@ export default function Home() {
 
   const gifs = [
     {
-      src: "/mailGif.gif",
+      src: mailGif,
       link: "https://norman-mailing-list.vercel.app/",
     },
-    { src: "/gameGif.gif", link: "https://norman-art.vercel.app" },
+    { src: gameGif, link: "https://norman-art.vercel.app" },
     // Add more gifs and links as needed
   ];
 
@@ -44,11 +50,7 @@ export default function Home() {
           position: "absolute",
           zIndex: -1,
         }}
-        src={
-          isAlternateImage
-            ? "/homepageRedrawCut0.png"
-            : "/homepageRedrawCut1.png"
-        }
+        src={isAlternateImage ? homepageRedrawCut0 : homepageRedrawCut1}
         alt="Background"
       />
 
@@ -61,7 +63,7 @@ export default function Home() {
           zIndex: 1,
           paddingLeft: "2px",
         }}
-        src={isAlternateImage ? "/lightcone0.png" : "/lightcone1.png"}
+        src={isAlternateImage ? lightcone0 : lightcone1}
         alt="Background"
       />
 
