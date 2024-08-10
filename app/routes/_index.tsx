@@ -50,7 +50,7 @@ export default function Home() {
           position: "absolute",
           zIndex: -1,
         }}
-        src={isAlternateImage ? homepageRedrawCut0 : homepageRedrawCut1}
+        src={isAlternateImage ? homepageRedrawCut1 : homepageRedrawCut0}
         alt="Background"
       />
 
