@@ -11,6 +11,7 @@ export const meta: MetaFunction = () => {
 export default function Home() {
   const [project, setProject] = useState("");
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
+  const [isAlternateImage, setIsAlternateImage] = useState(false);
 
   const gifs = [
     {
@@ -29,6 +30,10 @@ export default function Home() {
     window.open(gifs[currentGifIndex].link, "_blank");
   };
 
+  const toggleImages = () => {
+    setIsAlternateImage(!isAlternateImage);
+  };
+
   return (
     <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
       <img
@@ -39,7 +44,11 @@ export default function Home() {
           position: "absolute",
           zIndex: -1,
         }}
-        src="/homepageRedrawCut0.png"
+        src={
+          isAlternateImage
+            ? "/homepageRedrawCut0.png"
+            : "/homepageRedrawCut1.png"
+        }
         alt="Background"
       />
 
@@ -52,7 +61,7 @@ export default function Home() {
           zIndex: 1,
           paddingLeft: "2px",
         }}
-        src="/lightcone0.png"
+        src={isAlternateImage ? "/lightcone0.png" : "/lightcone1.png"}
         alt="Background"
       />
 
@@ -86,7 +95,7 @@ export default function Home() {
       <button
         onClick={showNextGif}
         style={{
-          top: "63%",
+          top: "61%",
           left: "47%",
           zIndex: 10,
           position: "absolute",
@@ -99,7 +108,7 @@ export default function Home() {
       <button
         onClick={enterApp}
         style={{
-          top: "66.5%",
+          top: "64.5%",
           left: "47.7%",
           zIndex: 10,
           position: "absolute",
@@ -109,6 +118,20 @@ export default function Home() {
         }}
       >
         Enter App
+      </button>
+      <button
+        onClick={toggleImages}
+        style={{
+          top: "68%",
+          left: "48%",
+          zIndex: 10,
+          position: "absolute",
+          background: "purple",
+          rotate: "-9deg",
+          fontWeight: "bold",
+        }}
+      >
+        Lightswitch
       </button>
       <BlackboardLG />
     </div>
