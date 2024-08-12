@@ -231,13 +231,13 @@ const Controls = ({
         onClick={showNextGif}
         style={{
           top: "61%",
-          left: "48.5%",
+          left: "47.5%",
           zIndex: 1000,
           position: "absolute",
           background: "gray",
           rotate: "-9deg",
           fontWeight: "bold",
-          transform: "scale(1.7)",
+          transform: "scale(1.1)",
         }}
       >
         Show Next ❯
@@ -246,13 +246,13 @@ const Controls = ({
         onClick={enterApp}
         style={{
           top: "64.5%",
-          left: "49%",
+          left: "48%",
           zIndex: 1000,
           position: "absolute",
           background: "green",
           rotate: "-9deg",
           fontWeight: "bold",
-          transform: "scale(1.7)",
+          transform: "scale(1.1)",
         }}
       >
         Enter App
@@ -261,13 +261,13 @@ const Controls = ({
         onClick={toggleImages}
         style={{
           top: "68%",
-          left: "49%",
+          left: "48%",
           zIndex: 1000,
           position: "absolute",
           background: "purple",
           rotate: "-9deg",
           fontWeight: "bold",
-          transform: "scale(1.7)",
+          transform: "scale(1.1)",
         }}
       >
         Lightswitch
@@ -338,7 +338,7 @@ interface Circle {
 
 const MovingCirclesContainer: React.FC = () => {
   const [circles, setCircles] = useState<Circle[]>([]);
-  const numCircles = 200;
+  const numCircles = 300;
   const speed = 0.1;
   const topEdgeRatio = 0.05;
   const circleSize = 0.3; // Size in percentage
@@ -424,11 +424,11 @@ const MovingCirclesContainer: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        width: "1800px",
-        height: "2300px",
+        width: "900px",
+        height: "1300px",
         rotate: "-93deg",
-        left: "26vw",
-        top: "-40vh",
+        left: "32vw",
+        top: "-50vh",
         overflow: "hidden",
         zIndex: 999,
       }}
