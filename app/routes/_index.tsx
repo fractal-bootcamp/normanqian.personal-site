@@ -20,7 +20,8 @@ export const meta: MetaFunction = () => {
 export default function Home() {
   const [project, setProject] = useState("");
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
-  const [isAlternateImage, setIsAlternateImage] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [brightness, setBrightness] = useState(1);
 
   const gifs = [
     {
@@ -40,28 +41,47 @@ export default function Home() {
   };
 
   const toggleImages = () => {
-    setIsAlternateImage(!isAlternateImage);
+    setIsDarkMode(!isDarkMode);
   };
+
+  useEffect(() => {
+    setBrightness(
+      isDarkMode ? Math.random() * 0.2 + 0.8 : Math.random() * 0.2 + 1.3
+    );
+  });
 
   return (
     <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
-      {[...Array(200)].map((_, index) => (
-        <Dust key={index} />
-      ))}
-
       <img
         style={{
           width: "100vw",
           height: "100vh",
           display: "block",
           position: "absolute",
+          zIndex: -4,
+          filter: `brightness(${brightness})`,
+        }}
+        src={homepageRedrawCut1}
+        alt="Background"
+      />
+      <Controls
+        showNextGif={showNextGif}
+        enterApp={enterApp}
+        toggleImages={toggleImages}
+      />
+
+      <BlackboardLG />
+      <div
+        style={{
+          position: "absolute",
+          top: "55%",
+          left: "40%",
+          width: "20vw",
+          height: "20vh",
           zIndex: -2,
+          background: "blue",
         }}
-        src={isAlternateImage ? homepageRedrawCut0 : homepageRedrawCut1}
-        alt="Background"
-      />
-
-      <Flicker isAlternateImage={isAlternateImage} />
+      ></div>
 
       <img
         style={{
@@ -69,12 +89,11 @@ export default function Home() {
           height: "100vh",
           display: "block",
           position: "absolute",
-          zIndex: 1,
+          zIndex: -1,
         }}
-        src={isAlternateImage ? homepageRedrawCutB : homepageRedrawCutA}
+        src={isDarkMode ? homepageRedrawCutA : homepageRedrawCutB}
         alt="Background"
       />
-
       <img
         style={{
           width: "40vw",
@@ -92,118 +111,10 @@ export default function Home() {
         src={gifs[currentGifIndex].src}
         alt="Project Preview"
       />
-      <div
-        style={{
-          position: "absolute",
-          width: "100vw",
-          height: "100vh",
-          zIndex: -10,
-          background: "blue",
-        }}
-      ></div>
-
-      <button
-        onClick={showNextGif}
-        style={{
-          top: "61%",
-          left: "47%",
-          zIndex: 10,
-          position: "absolute",
-          background: "gray",
-          rotate: "-9deg",
-        }}
-      >
-        Show Next ❯
-      </button>
-      <button
-        onClick={enterApp}
-        style={{
-          top: "64.5%",
-          left: "47.7%",
-          zIndex: 10,
-          position: "absolute",
-          background: "green",
-          rotate: "-9deg",
-          fontWeight: "bold",
-        }}
-      >
-        Enter App
-      </button>
-      <button
-        onClick={toggleImages}
-        style={{
-          top: "68%",
-          left: "48%",
-          zIndex: 10,
-          position: "absolute",
-          background: "purple",
-          rotate: "-9deg",
-          fontWeight: "bold",
-        }}
-      >
-        Lightswitch
-      </button>
-
-      <BlackboardLG />
+      <MovingCirclesContainer />
     </div>
   );
 }
-
-const BlackboardLG = () => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: "10vh",
-        left: "46vw",
-        zIndex: 10,
-        color: "lightgray",
-        width: "20%",
-        fontSize: "2vw",
-        fontFamily: "Chalkduster, fantasy",
-      }}
-    >
-      <h3>Norman Qian </h3>
-      <h5> &nbsp; Building Software </h5>
-      <div style={{ paddingLeft: "0.5em" }}>
-        {[
-          {
-            text: "github.com/elizasviel",
-            href: "https://github.com/elizasviel",
-          },
-          {
-            text: "linkedin.com/in/norman-qian",
-            href: "https://linkedin.com/in/norman-qian",
-          },
-          { text: "normanqian@gmail.com", href: "mailto:normanqian@gmail.com" },
-        ].map(({ text, href }) => (
-          <a
-            key={text}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              cursor: "pointer",
-              margin: "0.4em 0",
-              transition: "color 0.2s",
-              fontSize: "1.2vw",
-              paddingLeft: "1em",
-              display: "block",
-              textDecoration: "none",
-              color: "lightgray",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "lightgray")}
-            onMouseDown={(e) => (e.currentTarget.style.color = "#707070")}
-            onMouseUp={(e) => (e.currentTarget.style.color = "#a0a0a0")}
-          >
-            {text}
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const Dust = () => {
   const dustRef = useRef<HTMLDivElement>(null);
@@ -261,33 +172,311 @@ const Dust = () => {
         backgroundColor: "lemonchiffon",
         left: `${left}vw`,
         top: `${top}vh`,
-        zIndex: 1,
+        zIndex: -3,
         transition: "left 1s linear, top 1s linear", // Smooth linear transition
       }}
     />
   );
 };
 
-const Flicker = ({ isAlternateImage }: { isAlternateImage: boolean }) => {
-  const [opacity, setOpacity] = useState(0);
-  useEffect(() => {
-    setOpacity(Math.random() * 0.2 + 0.8);
-  });
+const BlackboardLG = () => {
   return (
-    <img
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "block",
-        position: "absolute",
-        zIndex: -1,
-        paddingLeft: "2px",
-        opacity: opacity,
-      }}
-      src={isAlternateImage ? lightcone1 : lightcone0}
-      alt="Background"
-    />
+    <>
+      <div
+        style={{
+          position: "absolute",
+          top: "10vh",
+          left: "46vw",
+          color: "lightgray",
+          width: "20%",
+          fontSize: "2vw",
+          fontFamily: "Chalkduster, fantasy",
+        }}
+      >
+        <h3>Norman Qian </h3>
+        <h5> &nbsp; Building Software </h5>
+        <ProjectItem
+          text="github.com/elizasviel"
+          link="https://github.com/elizasviel"
+        />
+        <br />
+
+        <ProjectItem
+          text="linkedin.com/in/norman-qian"
+          link="https://linkedin.com/in/norman-qian"
+        />
+        <br />
+        <br />
+        <ProjectItem
+          text="normanqian@gmail.com"
+          link="mailto:normanqian@gmail.com"
+        />
+      </div>
+    </>
   );
 };
 
-//base, flicker ontop of base
+const Controls = ({
+  showNextGif,
+  enterApp,
+  toggleImages,
+}: {
+  showNextGif: () => void;
+  enterApp: () => void;
+  toggleImages: () => void;
+}) => {
+  return (
+    <>
+      <button
+        onClick={showNextGif}
+        style={{
+          top: "61%",
+          left: "48.5%",
+          zIndex: 1000,
+          position: "absolute",
+          background: "gray",
+          rotate: "-9deg",
+          fontWeight: "bold",
+          transform: "scale(1.7)",
+        }}
+      >
+        Show Next ❯
+      </button>
+      <button
+        onClick={enterApp}
+        style={{
+          top: "64.5%",
+          left: "49%",
+          zIndex: 1000,
+          position: "absolute",
+          background: "green",
+          rotate: "-9deg",
+          fontWeight: "bold",
+          transform: "scale(1.7)",
+        }}
+      >
+        Enter App
+      </button>
+      <button
+        onClick={toggleImages}
+        style={{
+          top: "68%",
+          left: "49%",
+          zIndex: 1000,
+          position: "absolute",
+          background: "purple",
+          rotate: "-9deg",
+          fontWeight: "bold",
+          transform: "scale(1.7)",
+        }}
+      >
+        Lightswitch
+      </button>
+    </>
+  );
+};
+
+const ProjectItem = ({ text, link }: { text: string; link: string }) => {
+  const [hover, setHover] = useState(false);
+  const [down, setDown] = useState(false);
+  return (
+    <div style={{ position: "relative" }}>
+      <p
+        style={{
+          cursor: "pointer",
+          margin: "0.4em 0",
+          transition: "color 0.2s",
+          fontSize: "1.2vw",
+          paddingLeft: "1em",
+          display: "block",
+          textDecoration: "none",
+          zIndex: 998,
+          position: "absolute", // Absolute positioning to layer on top
+          top: 0, // Align top
+          left: 0, // Align left
+          color: hover ? "#a0a0a0" : "lightgray",
+          opacity: down ? 0.5 : 1,
+        }}
+      >
+        {text}
+      </p>
+      <a
+        href={link}
+        style={{
+          cursor: "pointer",
+          margin: "0.4em 0",
+          transition: "color 0.2s",
+          fontSize: "1.2vw",
+          paddingLeft: "1em",
+          display: "block",
+          textDecoration: "none",
+          zIndex: 10000,
+          color: "transparent",
+          position: "absolute", // Absolute positioning to layer on top
+          top: 0, // Align top
+          left: 0, // Align left
+        }}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onMouseDown={() => setDown(true)}
+        onMouseUp={() => setDown(false)}
+      >
+        {text}
+      </a>
+    </div>
+  );
+};
+
+interface Circle {
+  x: number;
+  y: number;
+  dx: number;
+  dy: number;
+  opacity: number;
+  inInnerTrapezoid: boolean;
+}
+
+const MovingCirclesContainer: React.FC = () => {
+  const [circles, setCircles] = useState<Circle[]>([]);
+  const numCircles = 200;
+  const speed = 0.1;
+  const topEdgeRatio = 0.05;
+  const circleSize = 0.3; // Size in percentage
+
+  // Returns the left and right edges of either the inner or outer trapezoid
+  const getTrapeziodEdges = (y: number, isInner: boolean) => {
+    const width = isInner ? 45 : 100;
+    const top = isInner ? 0 : 0;
+    const bottom = isInner ? 80 : 100;
+    const centerX = isInner ? 50 : 50;
+
+    const progress = (y - top) / (bottom - top);
+    const topWidth = width * topEdgeRatio;
+    const bottomWidth = width;
+    const currentWidth = topWidth + (bottomWidth - topWidth) * progress;
+
+    return {
+      left: centerX - currentWidth / 2,
+      right: centerX + currentWidth / 2,
+    };
+  };
+
+  const isPointInTrapezoid = (
+    x: number,
+    y: number,
+    isInner: boolean
+  ): boolean => {
+    const { left, right } = getTrapeziodEdges(y, isInner);
+    const top = isInner ? 0 : 0;
+    const bottom = isInner ? 100 : 100;
+    return x >= left && x <= right && y >= top && y <= bottom;
+  };
+
+  useEffect(() => {
+    const initialCircles: Circle[] = Array.from({ length: numCircles }, () => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      dx: 2 * (Math.random() - 0.5) * speed,
+      dy: 2 * (Math.random() - 0.5) * speed,
+      opacity: Math.random() * 1.5,
+      inInnerTrapezoid: false,
+    }));
+    setCircles(initialCircles);
+
+    const animate = () => {
+      setCircles((prevCircles) =>
+        prevCircles.map((circle) => {
+          let { x, y, dx, dy, opacity } = circle;
+
+          x += dx;
+          y += dy;
+
+          // Bounce off edges of outer trapezoid
+          const outerEdges = getTrapeziodEdges(y, false);
+          if (y < 0 || y > 100 - circleSize) dy = -dy;
+          if (x < outerEdges.left || x > outerEdges.right - circleSize)
+            dx = -dx;
+
+          // Keep within bounds
+          x = Math.max(
+            outerEdges.left,
+            Math.min(x, outerEdges.right - circleSize)
+          );
+          y = Math.max(0, Math.min(y, 100 - circleSize));
+
+          // Check if circle is in inner trapezoid
+          const inInnerTrapezoid = isPointInTrapezoid(
+            x + circleSize / 2,
+            y + circleSize / 2,
+            true
+          );
+
+          return { x, y, dx, dy, opacity, inInnerTrapezoid };
+        })
+      );
+    };
+
+    const intervalId = setInterval(animate, 50);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        width: "1800px",
+        height: "2300px",
+        rotate: "-93deg",
+        left: "26vw",
+        top: "-40vh",
+        overflow: "hidden",
+        zIndex: 999,
+      }}
+    >
+      {/* Outer trapezoid */}
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
+            50 * (1 + topEdgeRatio)
+          }% 0, 100% 100%, 0 100%)`,
+          backgroundColor: "transparent",
+        }}
+      />
+      {/* Inner trapezoid */}
+      <div
+        style={{
+          position: "absolute",
+          left: "20%",
+          top: "0%",
+          width: "60%",
+          height: "100%",
+          clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
+            50 * (1 + topEdgeRatio)
+          }% 0, 100% 100%, 0 100%)`,
+          backgroundColor: "transparent",
+        }}
+      />
+      {circles.map((circle, index) => (
+        <div
+          key={index}
+          style={{
+            opacity: `${circle.opacity}`,
+            position: "absolute",
+            width: `${circleSize}%`,
+            height: `${circleSize}%`,
+            borderRadius: "50%",
+            backgroundColor: circle.inInnerTrapezoid
+              ? "lemonchiffon"
+              : "transparent",
+            left: `${circle.x}%`,
+            top: `${circle.y}%`,
+            transition: "background-color 0.3s",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
