@@ -1,0 +1,17 @@
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(100vh) translateX(100vw);
+    rotate: 180deg;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    filter: brightness(1);
+  }
+}
+
+.dust {
+  animation: float 10s linear infinite;
+}

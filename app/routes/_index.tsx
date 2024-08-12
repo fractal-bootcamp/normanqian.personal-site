@@ -1,11 +1,14 @@
-import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
+import type { MetaFunction, LinksFunction } from "@remix-run/node";
+import { useState, useEffect, useRef } from "react";
 import gameGif from "../images/gameGif.gif";
 import mailGif from "../images/mailGif.gif";
+import homepageRedrawCutA from "../images/homepageRedrawCutA.png";
+import homepageRedrawCutB from "../images/homepageRedrawCutB.png";
 import homepageRedrawCut0 from "../images/homepageRedrawCut0.png";
 import homepageRedrawCut1 from "../images/homepageRedrawCut1.png";
 import lightcone0 from "../images/lightcone0.png";
 import lightcone1 from "../images/lightcone1.png";
+import "../styles/shared.css";
 
 export const meta: MetaFunction = () => {
   return [
@@ -42,17 +45,23 @@ export default function Home() {
 
   return (
     <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
+      {[...Array(200)].map((_, index) => (
+        <Dust key={index} />
+      ))}
+
       <img
         style={{
           width: "100vw",
           height: "100vh",
           display: "block",
           position: "absolute",
-          zIndex: -1,
+          zIndex: -2,
         }}
         src={isAlternateImage ? homepageRedrawCut0 : homepageRedrawCut1}
         alt="Background"
       />
+
+      <Flicker isAlternateImage={isAlternateImage} />
 
       <img
         style={{
@@ -61,9 +70,8 @@ export default function Home() {
           display: "block",
           position: "absolute",
           zIndex: 1,
-          paddingLeft: "2px",
         }}
-        src={isAlternateImage ? lightcone0 : lightcone1}
+        src={isAlternateImage ? homepageRedrawCutB : homepageRedrawCutA}
         alt="Background"
       />
 
@@ -135,6 +143,7 @@ export default function Home() {
       >
         Lightswitch
       </button>
+
       <BlackboardLG />
     </div>
   );
@@ -195,3 +204,90 @@ const BlackboardLG = () => {
     </div>
   );
 };
+
+const Dust = () => {
+  const dustRef = useRef<HTMLDivElement>(null);
+  const left = Math.random() * 100;
+  const top = Math.random() * 100;
+  const velocity = useRef({
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2,
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (dustRef.current) {
+        // Update velocity with a small random change
+        velocity.current.x += (Math.random() - 0.5) * 0.2;
+        velocity.current.y += (Math.random() - 0.5) * 0.2;
+
+        // Limit the velocity to a maximum value
+        velocity.current.x = Math.max(-1, Math.min(1, velocity.current.x));
+        velocity.current.y = Math.max(-1, Math.min(1, velocity.current.y));
+
+        // Calculate new position
+        const newLeft = Math.max(
+          0,
+          Math.min(
+            100,
+            parseFloat(dustRef.current.style.left) + velocity.current.x
+          )
+        );
+        const newTop = Math.max(
+          0,
+          Math.min(
+            100,
+            parseFloat(dustRef.current.style.top) + velocity.current.y
+          )
+        );
+
+        // Update the position
+        dustRef.current.style.left = `${newLeft}vw`;
+        dustRef.current.style.top = `${newTop}vh`;
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      ref={dustRef}
+      style={{
+        position: "absolute",
+        width: `10px`,
+        height: `10px`,
+        borderRadius: "50%",
+        backgroundColor: "lemonchiffon",
+        left: `${left}vw`,
+        top: `${top}vh`,
+        zIndex: 1,
+        transition: "left 1s linear, top 1s linear", // Smooth linear transition
+      }}
+    />
+  );
+};
+
+const Flicker = ({ isAlternateImage }: { isAlternateImage: boolean }) => {
+  const [opacity, setOpacity] = useState(0);
+  useEffect(() => {
+    setOpacity(Math.random() * 0.2 + 0.8);
+  });
+  return (
+    <img
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "block",
+        position: "absolute",
+        zIndex: -1,
+        paddingLeft: "2px",
+        opacity: opacity,
+      }}
+      src={isAlternateImage ? lightcone1 : lightcone0}
+      alt="Background"
+    />
+  );
+};
+
+//base, flicker ontop of base
