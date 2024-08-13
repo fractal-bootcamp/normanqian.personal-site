@@ -231,13 +231,15 @@ const Controls = ({
         onClick={showNextGif}
         style={{
           top: "61%",
-          left: "47.5%",
+          left: "46%",
           zIndex: 1000,
           position: "absolute",
           background: "gray",
           rotate: "-9deg",
           fontWeight: "bold",
-          transform: "scale(1.1)",
+          width: "7vw",
+          height: "3vh",
+          overflow: "hidden",
         }}
       >
         Show Next ❯
@@ -246,13 +248,15 @@ const Controls = ({
         onClick={enterApp}
         style={{
           top: "64.5%",
-          left: "48%",
+          left: "46.5%",
           zIndex: 1000,
           position: "absolute",
           background: "green",
           rotate: "-9deg",
           fontWeight: "bold",
-          transform: "scale(1.1)",
+          width: "7vw",
+          height: "3vh",
+          overflow: "hidden",
         }}
       >
         Enter App
@@ -261,13 +265,15 @@ const Controls = ({
         onClick={toggleImages}
         style={{
           top: "68%",
-          left: "48%",
+          left: "47%",
           zIndex: 1000,
           position: "absolute",
           background: "purple",
           rotate: "-9deg",
           fontWeight: "bold",
-          transform: "scale(1.1)",
+          width: "7vw",
+          height: "3vh",
+          overflow: "hidden",
         }}
       >
         Lightswitch
@@ -424,11 +430,11 @@ const MovingCirclesContainer: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        width: "900px",
-        height: "1300px",
+        width: "100vh", // 900px / 1920px (standard viewport width) * 100
+        height: "80.37vw", // 1300px / 1080px (standard viewport height) * 100
         rotate: "-93deg",
-        left: "32vw",
-        top: "-50vh",
+        left: "60vh",
+        top: "-22vw",
         overflow: "hidden",
         zIndex: 999,
       }}
@@ -442,7 +448,7 @@ const MovingCirclesContainer: React.FC = () => {
           clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
             50 * (1 + topEdgeRatio)
           }% 0, 100% 100%, 0 100%)`,
-          backgroundColor: "transparent",
+          backgroundColor: "red",
         }}
       />
       {/* Inner trapezoid */}
@@ -456,7 +462,7 @@ const MovingCirclesContainer: React.FC = () => {
           clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
             50 * (1 + topEdgeRatio)
           }% 0, 100% 100%, 0 100%)`,
-          backgroundColor: "transparent",
+          backgroundColor: "purple",
         }}
       />
       {circles.map((circle, index) => (
