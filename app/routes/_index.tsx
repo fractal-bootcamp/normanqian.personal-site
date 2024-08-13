@@ -448,7 +448,7 @@ const MovingCirclesContainer: React.FC = () => {
           clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
             50 * (1 + topEdgeRatio)
           }% 0, 100% 100%, 0 100%)`,
-          backgroundColor: "red",
+          backgroundColor: "transparent",
         }}
       />
       {/* Inner trapezoid */}
@@ -462,7 +462,7 @@ const MovingCirclesContainer: React.FC = () => {
           clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
             50 * (1 + topEdgeRatio)
           }% 0, 100% 100%, 0 100%)`,
-          backgroundColor: "purple",
+          backgroundColor: "transparent",
         }}
       />
       {circles.map((circle, index) => (
