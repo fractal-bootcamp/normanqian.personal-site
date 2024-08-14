@@ -1,5 +1,5 @@
 import type { MetaFunction, LinksFunction } from "@remix-run/node";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import gameGif from "../images/gameGif.gif";
 import mailGif from "../images/mailGif.gif";
 import homepageRedrawCutA from "../images/homepageRedrawCutA.png";
@@ -342,46 +342,50 @@ interface Circle {
   inInnerTrapezoid: boolean;
 }
 
+interface Point {
+  x: number;
+  y: number;
+}
+
 const MovingCirclesContainer: React.FC = () => {
   const [circles, setCircles] = useState<Circle[]>([]);
   const numCircles = 300;
   const speed = 0.1;
-  const topEdgeRatio = 0.05;
-  const circleSize = 0.3; // Size in percentage
+  const circleSize = 0.3; // Size in vw
 
-  // Returns the left and right edges of either the inner or outer trapezoid
-  const getTrapeziodEdges = (y: number, isInner: boolean) => {
-    const width = isInner ? 45 : 100;
-    const top = isInner ? 0 : 0;
-    const bottom = isInner ? 80 : 100;
-    const centerX = isInner ? 50 : 50;
+  const outerTrapezoid: Point[] = [
+    { x: 15, y: 31 },
+    { x: 100, y: -9 },
+    { x: 100, y: 69 },
+    { x: 15, y: 45 },
+  ];
 
-    const progress = (y - top) / (bottom - top);
-    const topWidth = width * topEdgeRatio;
-    const bottomWidth = width;
-    const currentWidth = topWidth + (bottomWidth - topWidth) * progress;
+  const innerTrapezoid: Point[] = [
+    { x: 18, y: 36 },
+    { x: 95, y: 0 },
+    { x: 96, y: 60 },
+    { x: 18, y: 40 },
+  ];
 
-    return {
-      left: centerX - currentWidth / 2,
-      right: centerX + currentWidth / 2,
-    };
-  };
-
-  const isPointInTrapezoid = (
-    x: number,
-    y: number,
-    isInner: boolean
-  ): boolean => {
-    const { left, right } = getTrapeziodEdges(y, isInner);
-    const top = isInner ? 0 : 0;
-    const bottom = isInner ? 100 : 100;
-    return x >= left && x <= right && y >= top && y <= bottom;
+  const isPointInPolygon = (point: Point, polygon: Point[]): boolean => {
+    let inside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      const xi = polygon[i].x,
+        yi = polygon[i].y;
+      const xj = polygon[j].x,
+        yj = polygon[j].y;
+      const intersect =
+        yi > point.y !== yj > point.y &&
+        point.x < ((xj - xi) * (point.y - yi)) / (yj - yi) + xi;
+      if (intersect) inside = !inside;
+    }
+    return inside;
   };
 
   useEffect(() => {
     const initialCircles: Circle[] = Array.from({ length: numCircles }, () => ({
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      x: Math.random() * 80 + 10, // Between 10 and 90 vw
+      y: Math.random() * 90 + 5, // Between 5 and 95 vh
       dx: 2 * (Math.random() - 0.5) * speed,
       dy: 2 * (Math.random() - 0.5) * speed,
       opacity: Math.random() * 1.5,
@@ -398,23 +402,19 @@ const MovingCirclesContainer: React.FC = () => {
           y += dy;
 
           // Bounce off edges of outer trapezoid
-          const outerEdges = getTrapeziodEdges(y, false);
-          if (y < 0 || y > 100 - circleSize) dy = -dy;
-          if (x < outerEdges.left || x > outerEdges.right - circleSize)
+          if (!isPointInPolygon({ x, y }, outerTrapezoid)) {
             dx = -dx;
+            dy = -dy;
+          }
 
           // Keep within bounds
-          x = Math.max(
-            outerEdges.left,
-            Math.min(x, outerEdges.right - circleSize)
-          );
+          x = Math.max(0, Math.min(x, 100 - circleSize));
           y = Math.max(0, Math.min(y, 100 - circleSize));
 
           // Check if circle is in inner trapezoid
-          const inInnerTrapezoid = isPointInTrapezoid(
-            x + circleSize / 2,
-            y + circleSize / 2,
-            true
+          const inInnerTrapezoid = isPointInPolygon(
+            { x: x + circleSize / 2, y: y + circleSize / 2 },
+            innerTrapezoid
           );
 
           return { x, y, dx, dy, opacity, inInnerTrapezoid };
@@ -430,11 +430,8 @@ const MovingCirclesContainer: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        width: "100vh", // 900px / 1920px (standard viewport width) * 100
-        height: "80.37vw", // 1300px / 1080px (standard viewport height) * 100
-        rotate: "-93deg",
-        left: "60vh",
-        top: "-22vw",
+        width: "100vw",
+        height: "100vh",
         overflow: "hidden",
         zIndex: 999,
       }}
@@ -445,9 +442,10 @@ const MovingCirclesContainer: React.FC = () => {
           position: "absolute",
           width: "100%",
           height: "100%",
-          clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
-            50 * (1 + topEdgeRatio)
-          }% 0, 100% 100%, 0 100%)`,
+          clipPath: `polygon(${outerTrapezoid
+            .map((p) => `${p.x}% ${p.y}%`)
+            .join(", ")})`,
+
           backgroundColor: "transparent",
         }}
       />
@@ -455,9 +453,7 @@ const MovingCirclesContainer: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          left: "20%",
-          top: "0%",
-          width: "60%",
+          width: "100%",
           height: "100%",
           clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
             50 * (1 + topEdgeRatio)
@@ -471,14 +467,14 @@ const MovingCirclesContainer: React.FC = () => {
           style={{
             opacity: `${circle.opacity}`,
             position: "absolute",
-            width: `${circleSize}%`,
-            height: `${circleSize}%`,
+            width: `${circleSize}vw`,
+            height: `${circleSize}vw`,
             borderRadius: "50%",
             backgroundColor: circle.inInnerTrapezoid
               ? "lemonchiffon"
               : "transparent",
-            left: `${circle.x}%`,
-            top: `${circle.y}%`,
+            left: `${circle.x}vw`,
+            top: `${circle.y}vh`,
             transition: "background-color 0.3s",
           }}
         />
