@@ -445,7 +445,6 @@ const MovingCirclesContainer: React.FC = () => {
           clipPath: `polygon(${outerTrapezoid
             .map((p) => `${p.x}% ${p.y}%`)
             .join(", ")})`,
-
           backgroundColor: "transparent",
         }}
       />
@@ -455,9 +454,9 @@ const MovingCirclesContainer: React.FC = () => {
           position: "absolute",
           width: "100%",
           height: "100%",
-          clipPath: `polygon(${50 * (1 - topEdgeRatio)}% 0, ${
-            50 * (1 + topEdgeRatio)
-          }% 0, 100% 100%, 0 100%)`,
+          clipPath: `polygon(${innerTrapezoid
+            .map((p) => `${p.x}% ${p.y}%`)
+            .join(", ")})`,
           backgroundColor: "transparent",
         }}
       />
