@@ -6,6 +6,7 @@ import homepageRedrawCutA from "../images/homepageRedrawCutA.png";
 import homepageRedrawCutB from "../images/homepageRedrawCutB.png";
 import homepageRedrawCut0 from "../images/homepageRedrawCut0.png";
 import homepageRedrawCut1 from "../images/homepageRedrawCut1.png";
+import croppedBlackboard from "../images/croppedBlackBoard.png";
 import lightcone0 from "../images/lightcone0.png";
 import lightcone1 from "../images/lightcone1.png";
 import "../styles/shared.css";
@@ -51,133 +52,138 @@ export default function Home() {
   });
 
   return (
-    <div style={{ margin: 0, padding: 0, overflow: "hidden" }}>
-      <img
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "block",
-          position: "absolute",
-          zIndex: -4,
-          filter: `brightness(${brightness})`,
-        }}
-        src={homepageRedrawCut1}
-        alt="Background"
-      />
-      <Controls
-        showNextGif={showNextGif}
-        enterApp={enterApp}
-        toggleImages={toggleImages}
-      />
-
-      <BlackboardLG />
+    <>
       <div
-        style={{
-          position: "absolute",
-          top: "55%",
-          left: "40%",
-          width: "20vw",
-          height: "20vh",
-          zIndex: -2,
-          background: "blue",
-        }}
-      ></div>
+        className="desktop-view"
+        style={{ margin: 0, padding: 0, overflow: "hidden" }}
+      >
+        <img
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "block",
+            position: "absolute",
+            zIndex: -4,
+            filter: `brightness(${brightness})`,
+          }}
+          src={homepageRedrawCut1}
+          alt="Background"
+        />
+        <Controls
+          showNextGif={showNextGif}
+          enterApp={enterApp}
+          toggleImages={toggleImages}
+        />
 
-      <img
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "block",
-          position: "absolute",
-          zIndex: -1,
-        }}
-        src={isDarkMode ? homepageRedrawCutA : homepageRedrawCutB}
-        alt="Background"
-      />
-      <img
-        style={{
-          width: "40vw",
-          height: "45vh",
-          right: "0.8%",
-          top: "9.2%",
-          position: "absolute",
-          zIndex: 1,
-          objectFit: "cover",
-          transform:
-            "perspective(80vw) rotateY(-50deg) rotateZ(-1deg) scale(0.95)",
-          opacity: 0.5,
-          border: "1px solid black",
-        }}
-        src={gifs[currentGifIndex].src}
-        alt="Project Preview"
-      />
-      <MovingCirclesContainer />
-    </div>
+        <BlackboardLG />
+        <div
+          style={{
+            position: "absolute",
+            top: "55%",
+            left: "40%",
+            width: "20vw",
+            height: "20vh",
+            zIndex: -2,
+            background: "blue",
+          }}
+        ></div>
+
+        <img
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "block",
+            position: "absolute",
+            zIndex: -1,
+          }}
+          src={isDarkMode ? homepageRedrawCutA : homepageRedrawCutB}
+          alt="Background"
+        />
+        <img
+          style={{
+            width: "40vw",
+            height: "45vh",
+            right: "0.8%",
+            top: "9.2%",
+            position: "absolute",
+            zIndex: 1,
+            objectFit: "cover",
+            transform:
+              "perspective(80vw) rotateY(-50deg) rotateZ(-1deg) scale(0.95)",
+            opacity: 0.5,
+            border: "1px solid black",
+          }}
+          src={gifs[currentGifIndex].src}
+          alt="Project Preview"
+        />
+        <MovingCirclesContainer />
+      </div>
+      <div className="mobile-view" style={{ background: "gray" }}>
+        <img
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "absolute",
+            zIndex: -1,
+          }}
+          src={croppedBlackboard}
+        ></img>
+        <div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "absolute",
+            color: "lightgray",
+            fontFamily: "Chalkduster, fantasy",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textDecoration: "none",
+          }}
+        >
+          <h1>Norman Qian </h1>
+          <h2> Software Portfolio </h2>
+
+          <a
+            href="https://norman-art.vercel.app"
+            style={{ textDecoration: "none", color: "lightgray" }}
+          >
+            norman-art.vercel.app
+          </a>
+
+          <a
+            href="https://norman-mailing-list.vercel.app/"
+            style={{ textDecoration: "none", color: "lightgray" }}
+          >
+            norman-mailing-list.vercel.app
+          </a>
+
+          <h2> Contact </h2>
+          <a
+            href="https://github.com/elizasviel"
+            style={{ textDecoration: "none", color: "lightgray" }}
+          >
+            github.com/elizasviel
+          </a>
+
+          <a
+            href="https://linkedin.com/in/norman-qian"
+            style={{ textDecoration: "none", color: "lightgray" }}
+          >
+            linkedin.com/in/norman-qian
+          </a>
+          <a
+            href="mailto:normanqian@gmail.com"
+            style={{ textDecoration: "none", color: "lightgray" }}
+          >
+            normanqian@gmail.com
+          </a>
+        </div>
+      </div>
+    </>
   );
 }
-
-const Dust = () => {
-  const dustRef = useRef<HTMLDivElement>(null);
-  const left = Math.random() * 100;
-  const top = Math.random() * 100;
-  const velocity = useRef({
-    x: (Math.random() - 0.5) * 2,
-    y: (Math.random() - 0.5) * 2,
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (dustRef.current) {
-        // Update velocity with a small random change
-        velocity.current.x += (Math.random() - 0.5) * 0.2;
-        velocity.current.y += (Math.random() - 0.5) * 0.2;
-
-        // Limit the velocity to a maximum value
-        velocity.current.x = Math.max(-1, Math.min(1, velocity.current.x));
-        velocity.current.y = Math.max(-1, Math.min(1, velocity.current.y));
-
-        // Calculate new position
-        const newLeft = Math.max(
-          0,
-          Math.min(
-            100,
-            parseFloat(dustRef.current.style.left) + velocity.current.x
-          )
-        );
-        const newTop = Math.max(
-          0,
-          Math.min(
-            100,
-            parseFloat(dustRef.current.style.top) + velocity.current.y
-          )
-        );
-
-        // Update the position
-        dustRef.current.style.left = `${newLeft}vw`;
-        dustRef.current.style.top = `${newTop}vh`;
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div
-      ref={dustRef}
-      style={{
-        position: "absolute",
-        width: `10px`,
-        height: `10px`,
-        borderRadius: "50%",
-        backgroundColor: "lemonchiffon",
-        left: `${left}vw`,
-        top: `${top}vh`,
-        zIndex: -3,
-        transition: "left 1s linear, top 1s linear", // Smooth linear transition
-      }}
-    />
-  );
-};
 
 const BlackboardLG = () => {
   return (
